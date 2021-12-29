@@ -93,7 +93,8 @@
   "Setup minibuffer overlay, which pushes the minibuffer content down."
   (add-hook 'pre-redisplay-functions 'vertico-buffer--redisplay nil 'local)
   (let ((temp (generate-new-buffer "*vertico*")))
-    (setq vertico-buffer--window (display-buffer temp vertico-buffer-display-action))
+    ;(setq vertico-buffer--window (display-buffer temp vertico-buffer-display-action))
+    (setq vertico-buffer--window (window--display-buffer temp (minibuffer-selected-window) 'reuse vertico-buffer-display-action))
     (set-window-buffer vertico-buffer--window (current-buffer))
     (kill-buffer temp))
   (let ((sym (make-symbol "vertico-buffer--destroy"))
